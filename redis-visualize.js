@@ -67,7 +67,7 @@ function getRedisData(params, done) {
   var key = util.format("%s:%s", host, port);
   var client = clients[key];
   if (!client){
-    client = redis.createClient(port, host, { password: password, db:retry_strategy: (options) => {
+    client = redis.createClient(port, host, { password: password, db: 1, retry_strategy: (options) => {
       if (options.error) {
         delete clients[key];
         return options.error;

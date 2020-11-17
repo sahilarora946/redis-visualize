@@ -33,7 +33,7 @@ var redis = require('redis');
 var stream = require('stream');
 var zlib = require('zlib');
 
-const PORT = 8079;
+const PORT = 8080;
 
 var REDIS_HOST = 'localhost';
 var REDIS_PORT = 6379;
@@ -67,7 +67,7 @@ function getRedisData(params, done) {
   var key = util.format("%s:%s", host, port);
   var client = clients[key];
   if (!client){
-    client = redis.createClient(port, host, { password: password, retry_strategy: (options) => {
+    client = redis.createClient(port, host, { password: password, db:retry_strategy: (options) => {
       if (options.error) {
         delete clients[key];
         return options.error;
